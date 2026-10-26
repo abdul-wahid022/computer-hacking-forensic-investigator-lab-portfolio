@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./images/cover.png" alt="CHFI Module 04 cover" width="800"/>
+  <img src="./images/cover4.png" alt="CHFI Module 04 cover" width="800"/>
 </p>
 
 # Module 04: Data Acquisition and Duplication
