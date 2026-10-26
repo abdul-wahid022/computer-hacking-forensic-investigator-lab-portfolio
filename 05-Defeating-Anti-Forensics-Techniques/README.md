@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./images/cover.png" alt="CHFI Module 05 cover" width="800"/>
+  <img src="./images/cover6.png" alt="CHFI Module 05 cover" width="800"/>
 </p>
 
 # Module 05: Defeating Anti-Forensics Techniques
