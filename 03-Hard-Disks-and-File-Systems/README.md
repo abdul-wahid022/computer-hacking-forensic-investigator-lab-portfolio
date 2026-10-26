@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./images/cover.png" alt="CHFI Module 03 cover" width="800"/>
+  <img src="./images/cover3.png" alt="CHFI Module 03 cover" width="800"/>
 </p>
 
 # Module 03: Understanding Hard Disks and File Systems
