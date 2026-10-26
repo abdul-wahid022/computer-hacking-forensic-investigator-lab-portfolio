@@ -1,23 +1,23 @@
 <div align="center">
 
-<img src="./images/cover2.png" alt="CHFI Module 02 — Computer Forensics Investigation Process" width="100%" />
+<img src="./images/cover3.png" alt="CHFI Module 03 — Understanding Hard Disks and File Systems" width="100%" />
 
 <br><br>
 
-<h1>Module 02 — Computer Forensics Investigation Process</h1>
-<h3>Recovery, Hashing and Forensic Imaging of a Formatted USB Drive Across Six Labs</h3>
+<h1>Module 03 — Understanding Hard Disks and File Systems</h1>
+<h3>Forensic Analysis of Three Disk Images: Ext4, NTFS and MBR</h3>
 
 <br>
 
-<img src="https://img.shields.io/badge/MODULE-02-0d1117?style=for-the-badge&labelColor=0d1117&color=00b4d8" />
+<img src="https://img.shields.io/badge/MODULE-03-0d1117?style=for-the-badge&labelColor=0d1117&color=00b4d8" />
 <img src="https://img.shields.io/badge/STATUS-COMPLETED-0d1117?style=for-the-badge&labelColor=0d1117&color=00b4d8" />
-<img src="https://img.shields.io/badge/LABS-6-0d1117?style=for-the-badge&labelColor=0d1117&color=00b4d8" />
+<img src="https://img.shields.io/badge/EVIDENCE-3%20IMAGES-0d1117?style=for-the-badge&labelColor=0d1117&color=00b4d8" />
 <img src="https://img.shields.io/badge/CHAIN%20OF%20CUSTODY-INCLUDED-0d1117?style=for-the-badge&labelColor=0d1117&color=00b4d8" />
 
 <br><br>
 
-<a href="#evidence-and-case"><b>Evidence</b></a> &nbsp;·&nbsp;
-<a href="#lab-walkthrough"><b>Labs</b></a> &nbsp;·&nbsp;
+<a href="#evidence"><b>Evidence</b></a> &nbsp;·&nbsp;
+<a href="#techniques"><b>Techniques</b></a> &nbsp;·&nbsp;
 <a href="#chain-of-custody"><b>Chain of Custody</b></a> &nbsp;·&nbsp;
 <a href="#key-takeaways"><b>Takeaways</b></a> &nbsp;·&nbsp;
 <a href="#full-report"><b>Full Report</b></a>
@@ -30,62 +30,57 @@
 
 ## Executive Summary
 
-This module documents a complete forensic investigation of a formatted 32 GB Samsung USB drive, from data recovery and hashing through deep analysis to a verified forensic image. Six labs cover the full process using **EaseUS, Autopsy, HxD, ExifTool, FTK Imager and VirusTotal**.
+This module documents the forensic analysis of three disk images covering **file system structure, deleted data recovery, timeline analysis and file signature verification**. The work used **WinHex, PhotoRec and mactime** across Ext4, NTFS and MBR layouts.
 
-Chain of custody was maintained throughout, hash values were recorded with multiple algorithms, and the original media was never modified.
+All images were integrity-verified with SHA-256 before analysis began.
 
-> All work was performed on lab evidence for educational purposes. Only the reports are published in this repository.
+> All work was performed on lab evidence for educational purposes under case ID `CASE-2026-M3`.
 
 <br>
 
-## Evidence and Case
+## Evidence
 
 <table>
-<tr><th>Item</th><th>Detail</th></tr>
-<tr><td><b>Subject</b></td><td>Formatted 32 GB Samsung USB drive</td></tr>
-<tr><td><b>Case ID</b></td><td><code>CHFI_Module2_Lab1to5_Case001</code></td></tr>
-<tr><td><b>Hash Algorithms</b></td><td>MD5, SHA-1, SHA-256, SHA-512</td></tr>
-<tr><td><b>Evidence Items</b></td><td>EV-001 original USB drive, EV-002 recovered files</td></tr>
+<tr><th>Item</th><th>Image</th><th>Result</th></tr>
+<tr><td><b>EV-001</b></td><td>Incomplete Ext4 image from an Ubuntu 16.04 virtual machine</td><td>Recovered <code>HideMarkedCols.xls</code>, a 2011 file found on a 2016 system</td></tr>
+<tr><td><b>EV-002</b></td><td>2 GiB NTFS volume</td><td>22 deleted files recovered with timestamps; file signatures verified</td></tr>
+<tr><td><b>EV-003</b></td><td>MBR disk with two NTFS partitions</td><td>Partition layout examined</td></tr>
 </table>
 
 <br>
 
-## Lab Walkthrough
+## Techniques
 
 <table>
-<tr><th>Lab</th><th>Focus</th><th>Tool</th><th>Outcome</th></tr>
-<tr><td><b>1</b></td><td>Data recovery</td><td><code>EaseUS</code></td><td>About 2 GB of files recovered from the formatted drive</td></tr>
-<tr><td><b>2</b></td><td>Hashing and malware check</td><td><code>VirusTotal</code></td><td>Files hashed with four algorithms; <code>Infected.pdf</code> flagged as a trojan by 44 of 62 engines</td></tr>
-<tr><td><b>3</b></td><td>File integrity</td><td>Hash comparison</td><td>Integrity demonstrated by comparing hash values</td></tr>
-<tr><td><b>4</b></td><td>Deep analysis</td><td><code>Autopsy</code> <code>HxD</code> <code>ExifTool</code></td><td>5 critical findings identified</td></tr>
-<tr><td><b>5 – 6</b></td><td>Evidence handling and imaging</td><td><code>FTK Imager</code></td><td>Evidence handled in FTK Imager and a verified E01 forensic image created</td></tr>
+<tr><th>Area</th><th>What Was Done</th><th>Tool</th></tr>
+<tr><td><b>File System Structure</b></td><td>Examined Ext4, NTFS and MBR layouts</td><td><code>WinHex</code></td></tr>
+<tr><td><b>Deleted Data Recovery</b></td><td>Metadata-based recovery and file carving</td><td><code>WinHex</code> <code>PhotoRec</code></td></tr>
+<tr><td><b>Timeline Analysis</b></td><td>Activity timelines built from file system timestamps</td><td><code>mactime</code></td></tr>
+<tr><td><b>Signature Verification</b></td><td>File headers checked against file extensions</td><td><code>WinHex</code></td></tr>
 </table>
-
-**Investigation flow:** recover deleted data → hash and scan every file → verify integrity → analyse with multiple tools → acquire a verified forensic image.
 
 <br>
 
 ## Chain of Custody
 
-The evidence record for Labs 1 to 5 covers the following.
+The record for Labs 1 to 5 documents the three original images and the derived evidence.
 
 <table>
 <tr><th>Item</th><th>Detail</th></tr>
-<tr><td><b>Evidence</b></td><td>EV-001 original USB drive, EV-002 recovered files</td></tr>
-<tr><td><b>Derived Items</b></td><td>Working copies, FTK source and exported evidence</td></tr>
-<tr><td><b>Records</b></td><td>Transfer log, storage locations and access controls</td></tr>
-<tr><td><b>Verification</b></td><td>Hash values recorded with MD5 and SHA-256</td></tr>
-<tr><td><b>Final Disposition</b></td><td>Retained for Lab 6 imaging</td></tr>
+<tr><td><b>Original Evidence</b></td><td>EV-001, EV-002 and EV-003 disk images</td></tr>
+<tr><td><b>Derived Evidence</b></td><td>Recovered files, carved files, timelines, signature checks and slack space</td></tr>
+<tr><td><b>Records</b></td><td>Transfer log, storage locations and hash values</td></tr>
+<tr><td><b>Final Disposition</b></td><td>Images retained for later modules</td></tr>
 </table>
 
 <br>
 
 ## Key Takeaways
 
-- **Hash everything.** Recording MD5, SHA-1, SHA-256 and SHA-512 values lets any later copy be verified against the original.
-- **Formatting is not erasure.** About 2 GB of data was recovered from a formatted drive.
-- **Never touch the original.** Analysis was done on recovered and working copies, and the final image was created and verified in FTK Imager.
-- **Documentation is part of the evidence.** The chain of custody record is what makes the findings defensible.
+- **Verify before you analyse.** SHA-256 hashing of every image confirms the evidence is intact before any work starts.
+- **Deleted does not mean gone.** Metadata-based recovery and carving brought back 22 deleted files from the NTFS volume.
+- **Timestamps tell a story.** A 2011 file on a 2016 system, and timelines built with `mactime`, show how dates support an investigation.
+- **Extensions can be wrong.** Checking file headers against extensions is a basic integrity check on any recovered file.
 
 <br>
 
@@ -93,9 +88,9 @@ The evidence record for Labs 1 to 5 covers the following.
 
 | | |
 |---|---|
-| **Tools Used** | `EaseUS` `Autopsy` `HxD` `ExifTool` `FTK Imager` `VirusTotal` |
-| **Hashes** | MD5, SHA-1, SHA-256, SHA-512 |
-| **Image Format** | E01 |
+| **Case ID** | `CASE-2026-M3` |
+| **Tools Used** | `WinHex` `PhotoRec` `mactime` |
+| **Hashes** | SHA-256 |
 | **Published Material** | Reports only |
 
 <br>
@@ -111,7 +106,7 @@ The lab report and the chain of custody record are available here:
 
 ## Disclaimer
 
-This work was carried out for educational purposes under the EC-Council CHFI curriculum. Disk images, recovered files and malware samples are not published in this repository.
+This work was carried out for educational purposes under the EC-Council CHFI curriculum. Disk images and recovered files are not published in this repository.
 
 <br>
 
