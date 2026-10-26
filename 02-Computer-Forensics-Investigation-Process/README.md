@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./images/cover.png" alt="CHFI Module 02 cover" width="800"/>
+  <img src="./images/cover2.png" alt="CHFI Module 02 cover" width="800"/>
 </p>
 
 # Module 02: Computer Forensics Investigation Process
